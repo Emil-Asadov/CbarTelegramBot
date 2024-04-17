@@ -108,7 +108,7 @@ namespace ConsoleAppCbarTelegramBot
                     }
                     if (!string.IsNullOrEmpty(endPoint))
                     {
-                        var url = $"http://127.0.0.1:5041/api/Home/{endPoint}"; //Server IP- 154.53.180.205
+                        var url = $"http://127.0.0.1:80/api/Home/{endPoint}"; //Server IP- 154.53.180.205
                         //url = $"http://localhost:5026/api/Home/{endPoint}"; //Local-da test etmey ucun
                         var client = new RestClient(url);
                         var request = new RestRequest();
