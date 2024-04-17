@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ConsoleAppCbarTelegramBot": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
