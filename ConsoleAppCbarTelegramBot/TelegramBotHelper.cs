@@ -206,7 +206,7 @@ namespace ConsoleAppCbarTelegramBot
                                     inpParamName = "metal";
                                     break;
                             }
-                            var url = $"http://cbarapi:80/api/Home/{endPoint}?{inpParamName}={text}";
+                            var url = $"http://cbarapi/api/Home/{endPoint}?{inpParamName}={text}";
                             //var url = $"http://154.53.180.205:5041/api/Home/{endPoint}?{inpParamName}={text}";
                             var client = new RestClient(url);
                             var request = new RestRequest();
