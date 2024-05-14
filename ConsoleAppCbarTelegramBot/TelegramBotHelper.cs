@@ -109,7 +109,7 @@ namespace ConsoleAppCbarTelegramBot
                     if (!string.IsNullOrEmpty(endPoint))
                     {
                         var url = $"http://cbarapi:80/api/Home/{endPoint}"; //Server IP
-                        //url = $"http://localhost:5026/api/Home/{endPoint}"; //Local-da test etmey ucun
+                        //url = $"http://154.53.180.205:5041/api/Home/{endPoint}"; //Local-da test etmey ucun
                         var client = new RestClient(url);
                         var request = new RestRequest();
                         request.Method = RestSharp.Method.Post;
@@ -207,6 +207,7 @@ namespace ConsoleAppCbarTelegramBot
                                     break;
                             }
                             var url = $"http://cbarapi:80/api/Home/{endPoint}?{inpParamName}={text}";
+                            //var url = $"http://154.53.180.205:5041/api/Home/{endPoint}?{inpParamName}={text}";
                             var client = new RestClient(url);
                             var request = new RestRequest();
                             request.Method = RestSharp.Method.Post;
@@ -215,8 +216,14 @@ namespace ConsoleAppCbarTelegramBot
                             var responseRest = client.Execute(request);
                             if (inpParamName.Equals("dateInp"))
                             {
-                                var res = JsonConvert.DeserializeObject<List<JsonFields>>(responseRest.Content);
-                                if (!(res is null))
+                                var res = new List<JsonFields>();
+                                try
+                                {
+                                    res = JsonConvert.DeserializeObject<List<JsonFields>>(responseRest.Content);
+                                }
+                                catch
+                                { }
+                                if (!res.Count.Equals(0))
                                 {
                                     foreach (var item in res)
                                     {
@@ -229,7 +236,13 @@ namespace ConsoleAppCbarTelegramBot
                             }
                             else
                             {
-                                var res = JsonConvert.DeserializeObject<JsonFields>(responseRest.Content);
+                                var res = new JsonFields();
+                                try
+                                {
+                                    res = JsonConvert.DeserializeObject<JsonFields>(responseRest.Content);
+                                }
+                                catch
+                                { }
                                 if (!(res.ValuteCode is null))
                                 {
                                     txt = $"MB-nin {res.Date} tarixinə {res.ValuteCode}-n Azərbaycan manatına qarşı rəsmi məzənnəsi{(char)13}{(char)10}{(char)13}{(char)10}Currency: {res.ValuteCode}{(char)13}{(char)10}Nominal: {res.Nominal}{(char)13}{(char)10}Name: {res.Name}{(char)13}{(char)10}Value: {res.Value}";
